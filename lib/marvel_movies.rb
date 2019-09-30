@@ -1,6 +1,2 @@
-require "marvel_movies/version"
-
-module MarvelMovies
-  class Error < StandardError; end
-  # Your code goes here...
-end
+require_relative "./marvel_movies/version"
+require_relative './marvel_movies/cli'
