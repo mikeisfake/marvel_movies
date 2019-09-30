@@ -14,13 +14,14 @@ class MarvelMovies::CLI
     puts "   4. Thor"
     puts "   5. Captain America: The First Avenger"
     puts "   6. The Avengers"
+    puts "   7. The rest of them"
   end
 
   def menu
     input = nil
 
     while input != "exit"
-      puts "Choose a movie you'd like to know more about by selecting a number, tyle list to see the movies again, or type exit to leave"
+      puts "Choose a movie you'd like to know more about by selecting a number, type list to see the movies again, or type exit to leave"
       input = gets.strip
 
       case input
