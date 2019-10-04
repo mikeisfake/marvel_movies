@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
 
-require './lib/marvel_movies'
+require './config/environment'
 
 MarvelMovies::CLI.new.call
