@@ -2,19 +2,21 @@
 
 class MarvelMovies::Movie
 
-  attr_accessor :title, :director, :release_date, :description
+  attr_accessor :title, :release_date, :rating, :runtime, :genre, :metascore
 
-  def initialize
+  @@all = []
 
+  def initialize(movie_data)
+    movie_data.each {|k,v| self.send("#{k}=", v)}
+    @@all << self
   end
 
   def self.all
-    MarvelMovies::MarvelScraper.list_of_movies
-    #needs to be an array of movie objects
+    @@all
   end
 
-  def title
-    MarvelMovies::MarvelScraper.cards.each {|movie| self.title = movie.css("p.card-body__headline").text.strip}
+  def self.movie_from_hash
+    MarvelMovies::MarvelScraper.movie_data.each{|hash| self.new(hash)}
   end
 
 

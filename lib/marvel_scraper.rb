@@ -1,19 +1,35 @@
 class MarvelMovies::MarvelScraper
 
   def self.doc
-    Nokogiri::HTML(open("https://www.marvel.com/movies"))
+    Nokogiri::HTML(open("https://www.imdb.com/list/ls022528471/"))
   end
 
   def self.cards
-    #returns array of "movie" objects
-    self.doc.css("#content_grid-3 .grid__6 .mvl-card--lob")
+    self.doc.css(".lister-item-content")
   end
 
   def self.list_of_movies
     title_array = []
-    self.cards.each {|card| title_array << card.css("p.card-body__headline").text.strip}
+    self.cards.each { |card| title_array << card.css("h3 a").text }
     title_array
-    #returns array of just movie titles as strings
   end
+
+  def self.movie_data
+    movie_array = []
+
+    self.cards.each_with_index do |card,i|
+      movie_array[i] = {
+        :title => card.css("h3 a").text,
+        :release_date => card.css("h3 .lister-item-year").text,
+        :rating => card.css(".certificate").text,
+        :runtime => card.css(".runtime").text,
+        :genre => card.css(".genre").text.strip,
+        :metascore => card.css(".metascore").text.strip
+      }
+    end
+    movie_array
+  end
+
+
 
 end
