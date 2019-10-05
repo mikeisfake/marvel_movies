@@ -10,8 +10,8 @@ class MarvelMovies::CLI
   end
 
   def greet
-    puts "Hello, and welcome to Mikes MCU movie database!"
-    puts "Type 'list' to see a list of current and upcoming movies in the MCU, or type 'exit' to leave."
+    puts "Hello, and welcome to Mikes MCU movie database!".colorize(:color => :red, :background => :white).bold
+    puts "Type "+"'list'".colorize(:red)+" to see a list of current and upcoming movies in the MCU, or type "+"'exit'".colorize(:red)+" to leave."
     input = gets.strip
 
     case input
@@ -20,15 +20,14 @@ class MarvelMovies::CLI
     when "exit"
       goodbye
     else
-      puts "Please enter a valid command."
+      puts "Please enter a valid command.".colorize(:cyan)
       greet
     end
   end
 
   def list_movies
-    puts "All Movies in the MCU:"
-    MarvelMovies::Movie.all.each.with_index(1).map {|movie,i| puts "    #{i}. #{movie.title}"}
-    #MarvelMovies::MarvelScraper.list_of_movies.each.with_index(1).map {|movie, i| puts "   #{i}. #{movie}" }
+    puts "All Movies in the MCU:".colorize(:color => :white, :background => :red).bold
+    MarvelMovies::Movie.all.each.with_index(1).map {|movie,i| puts "    #{i}. "+"#{movie.title}".colorize(:light_red)}
     menu
   end
 
@@ -36,26 +35,34 @@ class MarvelMovies::CLI
     input = nil
 
     while input != "exit"
-      puts "Choose a movie you'd like to know more about by selecting a number, type 'list' to see the movies again, or type exit to leave"
+      puts ""
+      puts "++Choose a movie you'd like to know more about by typing its number from the list.++".colorize(:color => :red, :background => :white).bold
+      puts "or"
+      puts " -type "+"'list'".colorize(:cyan)+" to see the movies again."
+      puts " -type "+"'exit'".colorize(:red)+" to leave."
       input = gets.strip
 
       if input == "list"
         list_movies
       elsif input == "exit"
         goodbye
-      else
+      elsif input.to_i > 0 && input.to_i < MarvelMovies::Movie.all.length - 1
         movies = MarvelMovies::Movie.all
-        puts "#{movies[input.to_i - 1].title}, #{movies[input.to_i - 1].release_date}"
-        puts "      Rating: #{movies[input.to_i - 1].rating}"
-        puts "      Runtime: #{movies[input.to_i - 1].runtime}"
-        puts "      Genre: #{movies[input.to_i - 1].genre}"
-        puts "      Metascore: #{movies[input.to_i - 1].metascore}"
+        puts "#{movies[input.to_i - 1].title}".colorize(:cyan)+", #{movies[input.to_i - 1].release_date}"
+        puts "   Rating:".colorize(:light_red)+" #{movies[input.to_i - 1].rating}"
+        puts "   Runtime:".colorize(:light_red)+" #{movies[input.to_i - 1].runtime}"
+        puts "   Genre:".colorize(:light_red)+" #{movies[input.to_i - 1].genre}"
+        puts "   Metascore:".colorize(:light_red)+" #{movies[input.to_i - 1].metascore}"
+        puts ""
+      else
+        puts "Please make a valid selection."
       end
     end
   end
 
   def goodbye
-    puts "Hope you learned something about the MCU! Bye!"
+    puts "Hope you learned something about the MCU! Bye!".bold
+    return
   end
 
 end
