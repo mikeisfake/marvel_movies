@@ -1,3 +1,3 @@
-module MarvelMovies
+module CBMovies
   VERSION = "0.1.0"
 end

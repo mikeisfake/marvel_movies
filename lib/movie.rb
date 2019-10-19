@@ -1,8 +1,6 @@
+class CBMovies::Movie
 
-
-class MarvelMovies::Movie
-
-  attr_accessor :title, :release_date, :rating, :runtime, :genre, :metascore
+  attr_accessor :title, :director, :release_date, :rating, :runtime, :genre, :metascore, :description
 
   @@all = []
 
@@ -15,10 +13,20 @@ class MarvelMovies::Movie
     @@all
   end
 
-  def self.movie_from_hash
-    MarvelMovies::MarvelScraper.movie_data.each{|hash| self.new(hash)}
+  def self.marvel_from_hash
+    CBMovies::Scraper.marvel_movie_data.each{|hash| self.new(hash)}
   end
 
+  def self.dc_from_hash
+    CBMovies::Scraper.dc_movie_data.each{|hash| self.new(hash)}
+  end
 
+  def self.xmen_from_hash
+    CBMovies::Scraper.xmen_movie_data.each{|hash| self.new(hash)}
+  end
+
+  def self.clear
+    self.all.clear 
+  end
 
 end
