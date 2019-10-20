@@ -20,9 +20,10 @@ class CBMovies::CLI
 
 .
     puts ""
-    puts "  "+"Welcome to Mikes Comic Book Movie Movie Finder!".colorize(:green).underline
+    puts "  "+"Welcome to Mikes Comic Book Movie Movie Finder!".colorize(:light_red).underline
     puts ""
-    puts "  Type "+"'dceu'".colorize(:green)+" for a list of DCEU films, type "+"'mcu'".colorize(:green)+" for a list of MCU films, type "+"'xmen'".colorize(:green)+" for a list of X-Men films, or type "+"'exit'".colorize(:red)+" to leave"
+    puts "  Type "+"'dceu'".colorize(:light_red)+" for a list of DCEU films, type "+"'mcu'".colorize(:light_red)+" for a list of MCU films, type "+"'xmen'".colorize(:light_red)+" for a list of X-Men films, or type "+"'exit'".colorize(:light_red)+" to leave"
+    print "> ".blink
     input = gets.strip
 
     case input
@@ -48,21 +49,22 @@ class CBMovies::CLI
 
   def list_movies
     puts ""
-    puts "  "+"All movies in release order:".colorize(:green).underline
+    puts "  "+"All movies in your selected universe:".colorize(:light_red).underline
     puts ""
-    CBMovies::Movie.all.each.with_index(1).map {|movie,i| puts "    #{i}. ".colorize(:green)+"#{movie.title}"}
+    CBMovies::Movie.all.each.with_index(1).map {|movie,i| puts "    #{i}. ".colorize(:light_red)+"#{movie.title}"}
     menu
   end
 
   def menu
     puts ""
-    puts " >"+" Choose a movie you'd like to know more about by typing its number from the list.".colorize(:green)
-    puts " > type "+"'dceu'".colorize(:green)+" to see DCEU movies."
-    puts " > type "+"'mcu'".colorize(:green)+" to see MCU movies."
-    puts " > type "+"'xmen'".colorize(:green)+" to see X-Men movies."
-    puts " > type "+"'list'".colorize(:green)+" to see the same movies again."
-    puts " > type "+"'exit'".colorize(:red)+" to leave."
+    puts " -"+" Choose a movie you'd like to know more about by typing its number from the list.".colorize(:light_red)
+    puts " - type "+"'dceu'".colorize(:light_red)+" to see DCEU movies."
+    puts " - type "+"'mcu'".colorize(:light_red)+" to see MCU movies."
+    puts " - type "+"'xmen'".colorize(:light_red)+" to see X-Men movies."
+    puts " - type "+"'list'".colorize(:light_red)+" to see the same movies again."
+    puts " - type "+"'exit'".colorize(:light_red)+" to leave."
     puts ""
+    print "> ".blink
     input = gets.strip
 
     if input == "list"
@@ -84,16 +86,19 @@ class CBMovies::CLI
       puts ""
       puts "****************************************************"
       puts ""
-      puts "   "+"#{movies[input.to_i - 1].title}".colorize(:green).underline+" #{movies[input.to_i - 1].release_date}"
+      puts "   "+"#{movies[input.to_i - 1].title}".colorize(:light_red).underline+" #{movies[input.to_i - 1].release_date}"
+      puts "   dir.".colorize(:light_red)+" #{movies[input.to_i - 1].director}"
       puts ""
-      puts "      Director:".colorize(:light_cyan)+" #{movies[input.to_i - 1].director}"
-      puts "      Rating:".colorize(:light_cyan)+" #{movies[input.to_i - 1].rating}"
-      puts "      Runtime:".colorize(:light_cyan)+" #{movies[input.to_i - 1].runtime}"
-      puts "      Genre:".colorize(:light_cyan)+" #{movies[input.to_i - 1].genre}"
-      puts "      Metascore:".colorize(:light_cyan)+" #{movies[input.to_i - 1].metascore}"
-      puts "      Description:".colorize(:light_cyan)+" #{movies[input.to_i - 1].description}"
+      puts "   "+"#{movies[input.to_i - 1].description}"
+      puts ""
+      puts "      Rating:".colorize(:light_red)+" #{movies[input.to_i - 1].rating}"
+      puts "      Runtime:".colorize(:light_red)+" #{movies[input.to_i - 1].runtime}"
+      puts "      Genre:".colorize(:light_red)+" #{movies[input.to_i - 1].genre}"
+      puts "      Metascore:".colorize(:light_red)+" #{movies[input.to_i - 1].metascore}"
       puts ""
       puts "****************************************************"
+      puts ""
+      sleep(5)
       menu
     elsif input == "exit"
       goodbye
@@ -106,7 +111,7 @@ class CBMovies::CLI
 
   def goodbye
     puts ""
-    puts "Hope you learned something about the wide world of comic book movies! Bye!".green.underline
+    puts "Hope you learned something about the wide world of comic book movies! Bye!".light_red.underline
     puts ""
   end
 

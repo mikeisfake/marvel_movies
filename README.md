@@ -20,7 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+After loading the gem, select the movie universe you'd like to know more about by typing its name, then select the specific movie you'd like to know more about by selecting its number from the displayed list.
 
 ## Development
 
@@ -38,4 +38,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the MarvelMovies project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/marvel_movies/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the CBMovies project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/marvel_movies/blob/master/CODE_OF_CONDUCT.md).
