@@ -28,16 +28,13 @@ class CBMovies::CLI
 
     case input
     when "dceu"
-      CBMovies::Movie.clear
-      CBMovies::Movie.dc_from_hash
+      @movies = CBMovies::Movie.dc_from_hash
       list_movies
     when "mcu"
-      CBMovies::Movie.clear
-      CBMovies::Movie.marvel_from_hash
+      @movies = CBMovies::Movie.marvel_from_hash
       list_movies
     when "xmen"
-      CBMovies::Movie.clear
-      CBMovies::Movie.xmen_from_hash
+      @movies = CBMovies::Movie.xmen_from_hash
       list_movies
     when "exit"
       goodbye
@@ -51,7 +48,7 @@ class CBMovies::CLI
     puts ""
     puts "  "+"All movies in your selected universe:".colorize(:light_red).underline
     puts ""
-    CBMovies::Movie.all.each.with_index(1).map {|movie,i| puts "    #{i}. ".colorize(:light_red)+"#{movie.title}"}
+    @movies.each.with_index(1).map {|movie,i| puts "    #{i}. ".colorize(:light_red)+"#{movie.title}"}
     menu
   end
 
@@ -70,35 +67,31 @@ class CBMovies::CLI
     if input == "list"
       list_movies
     elsif input == "mcu"
-      CBMovies::Movie.clear
-      CBMovies::Movie.marvel_from_hash
+      @movies = CBMovies::Movie.marvel_from_hash
       list_movies
     elsif input == "dceu"
-      CBMovies::Movie.clear
-      CBMovies::Movie.dc_from_hash
+      @movies = CBMovies::Movie.dc_from_hash
       list_movies
     elsif input == "xmen"
-      CBMovies::Movie.clear
-      CBMovies::Movie.xmen_from_hash
+      @movies = CBMovies::Movie.xmen_from_hash
       list_movies
-    elsif input.to_i > 0 && input.to_i < CBMovies::Movie.all.length + 1
-      movies = CBMovies::Movie.all
+    elsif input.to_i > 0 && input.to_i < @movies.length + 1
+      @movies
       puts ""
       puts "****************************************************"
       puts ""
-      puts "   "+"#{movies[input.to_i - 1].title}".colorize(:light_red).underline+" #{movies[input.to_i - 1].release_date}"
-      puts "   dir.".colorize(:light_red)+" #{movies[input.to_i - 1].director}"
+      puts "   "+"#{@movies[input.to_i - 1].title}".colorize(:light_red).underline+" #{@movies[input.to_i - 1].release_date}"
+      puts "   dir.".colorize(:light_red)+" #{@movies[input.to_i - 1].director}"
       puts ""
-      puts "   "+"#{movies[input.to_i - 1].description}"
+      puts "   "+"#{@movies[input.to_i - 1].description}"
       puts ""
-      puts "      Rating:".colorize(:light_red)+" #{movies[input.to_i - 1].rating}"
-      puts "      Runtime:".colorize(:light_red)+" #{movies[input.to_i - 1].runtime}"
-      puts "      Genre:".colorize(:light_red)+" #{movies[input.to_i - 1].genre}"
-      puts "      Metascore:".colorize(:light_red)+" #{movies[input.to_i - 1].metascore}"
+      puts "      Rating:".colorize(:light_red)+" #{@movies[input.to_i - 1].rating}"
+      puts "      Runtime:".colorize(:light_red)+" #{@movies[input.to_i - 1].runtime}"
+      puts "      Genre:".colorize(:light_red)+" #{@movies[input.to_i - 1].genre}"
+      puts "      Metascore:".colorize(:light_red)+" #{@movies[input.to_i - 1].metascore}"
       puts ""
       puts "****************************************************"
       puts ""
-      sleep(5)
       menu
     elsif input == "exit"
       goodbye

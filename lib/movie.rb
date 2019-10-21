@@ -2,31 +2,23 @@ class CBMovies::Movie
 
   attr_accessor :title, :director, :release_date, :rating, :runtime, :genre, :metascore, :description
 
-  @@all = []
-
   def initialize(movie_data)
     movie_data.each {|k,v| self.send("#{k}=", v)}
-    @@all << self
-  end
-
-  def self.all
-    @@all
   end
 
   def self.marvel_from_hash
-    CBMovies::Scraper.marvel_movie_data.each{|hash| self.new(hash)}
+    @@all_marvel ||= CBMovies::Scraper.movie_data(
+      "https://www.imdb.com/list/ls022528471/").map{|hash| self.new(hash)}
   end
 
   def self.dc_from_hash
-    CBMovies::Scraper.dc_movie_data.each{|hash| self.new(hash)}
+    @@all_dc ||= CBMovies::Scraper.movie_data(
+      "https://www.imdb.com/list/ls062501894/").map{|hash| self.new(hash)}
   end
 
   def self.xmen_from_hash
-    CBMovies::Scraper.xmen_movie_data.each{|hash| self.new(hash)}
-  end
-
-  def self.clear
-    self.all.clear 
+    @@all_xmen ||= CBMovies::Scraper.movie_data(
+      "https://www.imdb.com/list/ls024445822/").map{|hash| self.new(hash)}
   end
 
 end

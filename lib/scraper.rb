@@ -1,21 +1,29 @@
 class CBMovies::Scraper
 
-  def self.marvel_movie_data
-    doc = Nokogiri::HTML(open("https://www.imdb.com/list/ls022528471/"))
-    cards = doc.css(".lister-item-content")
+  # def self.marvel_movie_data
+  #   doc = Nokogiri::HTML(open("https://www.imdb.com/list/ls022528471/"))
+  #   cards = doc.css(".lister-item-content")
+  #
+  #   self.scrape(cards)
+  # end
+  #
+  # def self.dc_movie_data
+  #   doc = Nokogiri::HTML(open("https://www.imdb.com/list/ls062501894/"))
+  #   cards = doc.css(".lister-item-content")
+  #
+  #   self.scrape(cards)
+  # end
+  #
+  # def self.xmen_movie_data
+  #   doc = Nokogiri::HTML(open("https://www.imdb.com/list/ls024445822/"))
+  #   cards = doc.css(".lister-item-content")
+  #
+  #   self.scrape(cards)
+  # end
 
-    self.scrape(cards)
-  end
 
-  def self.dc_movie_data
-    doc = Nokogiri::HTML(open("https://www.imdb.com/list/ls062501894/"))
-    cards = doc.css(".lister-item-content")
-
-    self.scrape(cards)
-  end
-
-  def self.xmen_movie_data
-    doc = Nokogiri::HTML(open("https://www.imdb.com/list/ls024445822/"))
+  def self.movie_data(url)
+    doc = Nokogiri::HTML(open(url))
     cards = doc.css(".lister-item-content")
 
     self.scrape(cards)
